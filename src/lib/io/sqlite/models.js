@@ -48,7 +48,7 @@ function noteFromNoteModel(note) {
     id: note.id,
     uuid: note.uuid,
     mutationName: note.mutationName,
-    preview: note.preview
+    preview: JSON.stringify(note.preview)
   });
 }
 
