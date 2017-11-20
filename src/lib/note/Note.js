@@ -9,6 +9,11 @@ export default class Note {
   constructor(content, mutationName, tags, attributes, options) {
     options = options || {}; // avoid undefined errors
 
+    const cont = {};
+    cont[mutationName] = content;
+    this.content = cont;
+    this.mutationName = mutationName;
+
     const uuid = uuidv4();
     this.uuid = options.uuid ? options.uuid : uuid;
     this.id = options.id;
@@ -17,11 +22,6 @@ export default class Note {
     this.preview = options.preview ? options.preview : serializePreview(this);
     this.attributes = attributes;
     this.tags = tags;
-
-    const cont = {};
-    cont[mutationName] = content;
-    this.content = cont;
-    this.mutationName = mutationName;
 
     this.forceUUIdToBeString();
   }
@@ -119,7 +119,7 @@ export default class Note {
       id: json.id,
       created_at: json.created_at,
       updated_at: json.updated_at,
-      preivew: json.preview
+      preview: json.preview
     });
   }
 }
