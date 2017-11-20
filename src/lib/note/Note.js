@@ -3,6 +3,7 @@ import Tag from "./Tag.js";
 import _ from "lodash";
 import uuidv4 from "uuid/v4";
 import { loadNoteContent } from "../io";
+import { serializePreview, renderPreview as renderPre } from "../preview";
 
 export default class Note {
   constructor(content, mutationName, tags, attributes, options) {
@@ -13,6 +14,7 @@ export default class Note {
     this.id = options.id;
     this.created_at = options.created_at;
     this.updated_at = options.updated_at;
+    this.preview = options.preview ? options.preview : serializePreview(this);
     this.attributes = attributes;
     this.tags = tags;
 
@@ -71,6 +73,14 @@ export default class Note {
     });
   };
 
+  updatePreview = () => {
+    this.preview = serializePreview(this);
+  };
+
+  renderPreview = () => {
+    return renderPre(this.preview);
+  };
+
   setContent = content => {
     const cont = {};
     cont[this.mutationName] = content;
@@ -108,7 +118,8 @@ export default class Note {
       uuid: `${json.uuid}`,
       id: json.id,
       created_at: json.created_at,
-      updated_at: json.updated_at
+      updated_at: json.updated_at,
+      preivew: json.preview
     });
   }
 }

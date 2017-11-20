@@ -1,8 +1,12 @@
 import Preview from "./Preview.js";
 import React from "react";
 
-function getPreview(note) {
-  return <Preview note={note} />;
+function renderPreview(preview) {
+  return <Preview preview={preview} />;
 }
 
-export { getPreview };
+function serializePreview(note) {
+  return "Note: " + note.uuid;
+}
+
+export { renderPreview, serializePreview };
