@@ -8,18 +8,22 @@ function renderPreview(preview) {
   return <Preview preview={preview} />;
 }
 
+function formatText(text) {
+  let formattedText = text === "" ? "New Note" : text;
+  formattedText =
+    text.length > MAX_PREVIEW_LENGTH
+      ? text.substring(0, MAX_PREVIEW_LENGTH - 3) + "..."
+      : text;
+  return formattedText;
+}
+
 function serializePreview(note) {
   if (note.content[note.mutationName] === null) {
     return "No preview";
   }
   const editorState = deSerializeContent(note.content[EDITOR_NAME]);
-  let text = editorState.getCurrentContent().getFirstBlock().text;
-  text = text === "" ? "New Note" : text;
-  text =
-    text.length > MAX_PREVIEW_LENGTH
-      ? text.substring(0, MAX_PREVIEW_LENGTH - 3) + "..."
-      : text;
-  return text;
+  const text = editorState.getCurrentContent().getFirstBlock().text;
+  return formatText(text);
 }
 
 export { renderPreview, serializePreview };
