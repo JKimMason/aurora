@@ -14,14 +14,14 @@ class Preview extends React.Component {
   render() {
     return (
       <div>
-        <p>{this.props.preview}</p>
+        <p>{this.props.preview.text}</p>
       </div>
     );
   }
 }
 
 Preview.propTypes = {
-  preview: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired
+  preview: PropTypes.object.isRequired
 };
 
 export default mutate(Preview, "Preview");

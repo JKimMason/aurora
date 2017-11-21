@@ -9,11 +9,11 @@ function renderPreview(preview) {
 }
 
 function formatText(text) {
-  let formattedText = text === "" ? "New Note" : text;
-  formattedText =
-    text.length > MAX_PREVIEW_LENGTH
-      ? text.substring(0, MAX_PREVIEW_LENGTH - 3) + "..."
-      : text;
+  const newText = text ? text : "New Note";
+  const formattedText =
+    newText.length > MAX_PREVIEW_LENGTH
+      ? newText.substring(0, MAX_PREVIEW_LENGTH - 3) + "..."
+      : newText;
   return formattedText;
 }
 
@@ -23,7 +23,7 @@ function serializePreview(note) {
   }
   const editorState = deSerializeContent(note.content[EDITOR_NAME]);
   const text = editorState.getCurrentContent().getFirstBlock().text;
-  return formatText(text);
+  return { text: formatText(text) };
 }
 
 export { renderPreview, serializePreview };

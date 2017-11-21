@@ -119,7 +119,7 @@ export default class Note {
       id: json.id,
       created_at: json.created_at,
       updated_at: json.updated_at,
-      preview: json.preview
+      preview: JSON.parse(json.preview)
     });
   }
 }
